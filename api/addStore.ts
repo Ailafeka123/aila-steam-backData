@@ -1,4 +1,4 @@
-import { db } from "../lib/admin";
+import { db } from "./lib/admin.ts";
 import admin from "firebase-admin";
 
 export default async function handler(req:Request, res:Response){
