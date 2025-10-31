@@ -1,13 +1,18 @@
 import { db } from "./lib/admin.js";
-import admin from "firebase-admin";
+import type { ResType,Res } from "../types/index.js";
+// import admin from "firebase-admin";
 
-export default async function handler(req:Request, res:Response){
-    console.log('觸發api測試');
-    const data = db.collection('steamCheck').doc("ailaTest");
-    console.log("進行刷新");
-    data.set({
-        AtTime : admin.firestore.FieldValue.serverTimestamp()
+export default async function handler(req:Request, res : Res< ResType<Date> >){
+    const TimePosition = db.collection('steamCheck').doc("ailaTest");
+    try{
+        const getData = await TimePosition.get();
+        if(!getData.exists){
+            throw Error("更新時間錯誤，取無資料")
         }
-    )
-    console.log("完成時間刷新")
+        const data:Date = getData.data()!.AtTime.toDate();
+        return res.status(200).json({success : true, data:data});
+    }catch(e){
+        const msg = e instanceof Error ? e.message : String(e)
+        return res.status(500).json({success:false, data:msg});
+    }
 }
