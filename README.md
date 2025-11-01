@@ -8,7 +8,7 @@
   1. React + TypeScript + vite : 主框架
   
 - 後端
-  1. steamSPA : 抓取最新熱門資料，減少算力
+  1. [steamSpy](https://steamspy.com/ "前往SteamSpy") : 抓取最新熱門資料，減少算力，目前採用ccu方式去排列。 
   2. Github Acitve : 定時觸發使用
   3. vercel : 主要運行部分，減輕Github Acitve的運行消耗，且作為計時使用
   4. firebase-admin: 避免firebaseSDK的權限。
@@ -24,5 +24,13 @@
 - 手動更新
   1. 檢查上一次更新時間 
   2. 通過 進行上面更新流程 不通過 拒絕 回傳上次更新時間 表示近期以更新 不需要更新
+
+
+## 目前進度
+  1. vercel 與 firebase-admin 部屬完成
+  2. Api製作
+    - firebase-admin 當前狀態資料完成
+    - SteamSpy資料讀取完成
+    - Steam官方對應資料 尚未完成
 
 
