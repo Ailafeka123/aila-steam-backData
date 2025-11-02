@@ -32,17 +32,17 @@ function App() {
     if(reSetColdDown.current)return;
     reSetColdDown.current = true;
     try{
+      setErrorText("更新中...")
       const res = await fetch('/api/getNewData',{
         method:"GET",
       });
       const data = await res.json();
-      
-      console.log(data.data);
 
       if(data.success === false){
         setErrorText(data.data);
       }else{
         // 刷新時間
+        setErrorText("更新完成")
         await getTimeFunc();
       }
     }catch(e){
