@@ -21,7 +21,7 @@ export default async function handler(req:Request, res : Res< ResType<string> >)
             throw Error("更新時間錯誤，取無資料")
         }
         const statusData = getData.data() as reStaetState;
-        console.log(statusData)
+        console.log('資料讀取完成')
         // 更新firebase那邊 進行準備
         if(statusData.status !== "ready"){
             throw Error("更新中，不可進行更新")

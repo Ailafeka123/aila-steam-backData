@@ -1,0 +1,16 @@
+name: auto fetch API 
+
+on:
+  schedule:
+    - cron: "0 */2 * * *"
+  workflow_dispatch:
+
+
+jobs:
+  call_api:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: call API
+        run:  |
+          curl -X GET "https://aila-steam-back-data.vercel.app/api/getNewData"
