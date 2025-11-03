@@ -12,7 +12,11 @@ export default async function handler(req:Request, res : Res< ResType<string> >)
     let categoryList: Set<string> = new Set();
     // 關鍵字搜尋key 
     let searchTotalKey :Set<string> = new Set();
-
+    // 防止因為check狀態 而導致更新中被強制開啟問題
+    // 理想狀態 => 通過狀態 => 後續錯誤 => 回歸ready
+    // => 沒通過狀態 => 不進行回歸ready 
+    // 避免導致 A在觸發更新 B 連續觸發兩次更新 導致 check => ready(第一次B呼叫導致) => B 也能更新的情況。
+    let checkBoolean : boolean = false;
     console.log('進行查詢');
     try{
         // 或取上一次資料刷新資料時間
@@ -29,6 +33,7 @@ export default async function handler(req:Request, res : Res< ResType<string> >)
             await TimePosition.set({
                 status:"check"
             }, { merge: true })
+            checkBoolean = true;
         }
 
         // 確認沒再更新 抓取上一次資料
@@ -210,8 +215,10 @@ export default async function handler(req:Request, res : Res< ResType<string> >)
         return res.status(500).json({success:false, data:msg});
 
     }finally{
-        await TimePosition.set({
-            status:"ready",
-        }, { merge: true } );
+        if(checkBoolean){
+            await TimePosition.set({
+                status:"ready",
+            }, { merge: true } );
+        }
     }
 }
