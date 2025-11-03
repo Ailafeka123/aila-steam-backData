@@ -29,12 +29,9 @@
 ## 目前進度
   1. vercel 與 firebase-admin 部屬完成
   2. Api製作
-    - firebase-admin 當前狀態資料完成
-
-    - SteamSpy資料讀取完成
-    
-    - Steam官方對應資料 添增完成
-
-    - Steam遊戲對應新聞 暫不設定。
+   - firebase-admin 當前狀態資料完成
+   - SteamSpy資料讀取完成
+   - Steam官方對應資料 添增完成 github Active自動化更新完成
+   - Steam遊戲對應新聞 暫不設定 待後續前端畫面展示好在依據情況添加
 
 
